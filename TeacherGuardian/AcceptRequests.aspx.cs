@@ -12,13 +12,14 @@ public partial class AcceptRequests : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-             
+            UserAuth.AuthenticateUser("Admin.aspx",true);
+
         }
 
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        gridview1.SelectedRow.BackColor = System.Drawing.Color.Blue;
+        gridview1.SelectedRow.BackColor = System.Drawing.Color.LightGreen;
         GridViewRow row = gridview1.SelectedRow;
         if (row == null)
             return;
@@ -36,30 +37,47 @@ public partial class AcceptRequests : System.Web.UI.Page
             if (row == null)
                 return;
             string ReqId = row.Cells[1].Text;
-            string FacName = row.Cells[4].Text;
-            string FacId = row.Cells[5].Text;
-            string StudName = row.Cells[2].Text;
-            string StudId = row.Cells[3].Text;
+            string FacName = row.Cells[3].Text;
+            string FacId = row.Cells[2].Text;
+            string StudName = row.Cells[5].Text;
+            string StudId = row.Cells[4].Text;
             try
             {
-                con.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=TGdatabase;Integrated Security=True";
+            System.Diagnostics.Debug.WriteLine("VALUE: " + FacId + StudId);
+                con.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=TeacherGuardian;Integrated Security=True";
                 con.Open();
                 SqlCommand com = new SqlCommand("DELETE FROM Request WHERE RequestId=@reqid", con);
-                com.Parameters.AddWithValue("reqid", ReqId);
+                com.Parameters.AddWithValue("@reqid", ReqId);
                 com.ExecuteNonQuery();
-                SqlCommand cmd = new SqlCommand("UPDATE Student SET FacultyId=@facid, HasGuardian=\'True\' WHERE Id=@studid", con);
-                cmd.Parameters.AddWithValue("facid", FacId);
-                cmd.Parameters.AddWithValue("studid", StudId);
-                cmd.ExecuteNonQuery();
+
+                com = new SqlCommand("UPDATE Student SET FacultyId=@facid, HasGuardian=1 WHERE Id=@studid", con);
+                com.Parameters.AddWithValue("@facid", FacId);
+                com.Parameters.AddWithValue("@studid", StudId);
+                com.ExecuteNonQuery();
+
+            com = new SqlCommand("Insert into Guardian  values (@FacultyId,@FacultyName,@StudentId,@StudentName);",con);
+            com.Parameters.AddWithValue("@FacultyId",FacId);
+
+            com.Parameters.AddWithValue("@FacultyName",FacName);
+
+            com.Parameters.AddWithValue("@StudentId",StudId);
+
+            com.Parameters.AddWithValue("@StudentName",StudName);
+
+
+            com.ExecuteNonQuery();
+            
             }
             catch (Exception ex)
             {
+            System.Diagnostics.Debug.WriteLine(ex);
                 //Label1.Text = ex.Message;
             }
             finally
             {
                 con.Close();
             }
+        gridview1.DataBind();
         }
 
         protected void DeclineSelected(object sender, EventArgs e)
@@ -75,7 +93,7 @@ public partial class AcceptRequests : System.Web.UI.Page
             string StudId = row.Cells[3].Text;
             try
             {
-                con.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=TGdatabase;Integrated Security=True";
+                con.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=TeacherGuardian;Integrated Security=True";
                 con.Open();
                 SqlCommand com = new SqlCommand("DELETE FROM Request WHERE RequestId=@reqid", con);
                 com.Parameters.AddWithValue("reqid", ReqId);

@@ -19,7 +19,7 @@ public partial class AssignGuardians : System.Web.UI.Page
         string StudId = ListBox2.SelectedItem.Value;
         string FacId = ListBox1.SelectedItem.Value;
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=TeacherGuardian;Integrated Security=True;";
+        con.ConnectionString = "data source=(localdb)\\mssqllocaldb;initial Catalog=TeacherGuardian;Integrated Security=True;";
         try
         {
             con.Open();
