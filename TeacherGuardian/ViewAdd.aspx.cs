@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _Default : System.Web.UI.Page
+public partial class ViewAdd : System.Web.UI.Page
 {
 
     string facultyId;
@@ -14,9 +14,27 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        facultyId = Session["userId"].ToString();
-         facultyName = Session["userName"].ToString();
-        
+        if (!IsPostBack)
+        {
+            HttpCookie cookie = Request.Cookies["user"];
+            if (cookie == null)
+            {
+                Response.Redirect("Faculty.aspx");
+                //Redirect
+            }
+
+            if (Convert.ToBoolean(cookie["authenticated"].ToString()))
+            {
+
+                facultyId = Session["userId"].ToString();
+                facultyName = Session["userName"].ToString();
+            }
+            else
+            {
+                Response.Redirect("Faculty.aspx");
+            }
+        }
+
     }
 
     protected void submitRequest_Click(object sender, EventArgs e)

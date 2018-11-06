@@ -41,6 +41,9 @@ public partial class Faculty : System.Web.UI.Page
                 if (currentEmail.Equals(email) && currentPass.Equals(password))
                 {
                     flag = 1;
+                    HttpCookie cookie = new HttpCookie("user");
+                    cookie["authenticated"] = true.ToString();
+                    Response.Cookies.Add(cookie);
                     Session["userid"] = facultyid;
                     Session["username"] = facultyName;
                     Response.Redirect("Default.aspx");

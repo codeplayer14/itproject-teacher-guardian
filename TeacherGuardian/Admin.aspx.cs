@@ -13,12 +13,12 @@ public partial class Admin : System.Web.UI.Page
         if (!IsPostBack)
         {
             status.Visible = false;
+
         }
 
     }
     protected void submit_Click(object sender, EventArgs e)
     {
-        int flag = 0;
         string email = emailIdBox.Text;
         string password = passwordBox.Text;
         SqlConnection con = new SqlConnection();
@@ -42,7 +42,7 @@ public partial class Admin : System.Web.UI.Page
                 if (currentEmail.Equals(email) && currentPass.Equals(password))
                 {
               
-                    Response.Redirect("AdminPage1.aspx");
+                    Response.Redirect("AcceptRequests.aspx");
                 }
             }
 

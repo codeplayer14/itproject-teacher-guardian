@@ -10,6 +10,10 @@ public partial class AcceptRequests : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+             
+        }
 
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

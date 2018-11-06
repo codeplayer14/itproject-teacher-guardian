@@ -5,17 +5,32 @@
 <html>
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="master.css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-        <div class="top-navbar">
-            <asp:HyperLink runat="server" Text="Admin" CssClass="navbar-title" NavigateUrl="Admin.aspx" Target="_self"></asp:HyperLink>
-            
-            <asp:Hyperlink runat="server" Text="Faculty" cssclass="navbar-title" NavigateUrl="Faculty.aspx" Target="_self"></asp:Hyperlink>
-        </div>
+
+<div class="navbar">
+<div class="dropdown">
+  <button class="dropbtn">Admin</button>
+  <div class="dropdown-content">
+    <a href="AssignGuardians.aspx">Assign Guardians</a>
+    <a href="AcceptRequests.aspx">Accept Requests</a>
+    <a href="Report.aspx">Report</a>
+  </div>
+</div>
+
+        
+<div class="dropdown">
+  <button class="dropbtn">Faculty</button>
+  <div class="dropdown-content">
+    <a href="ViewAdd.aspx"> Guardianship</a>
+  </div>
+</div>
+    </div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
