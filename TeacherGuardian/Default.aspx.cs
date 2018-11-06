@@ -11,4 +11,24 @@ public partial class _Default : System.Web.UI.Page
     {
 
     }
+
+    protected void submitRequest_Click(object sender, EventArgs e)
+    {
+        string facultyId = Session["userId"].ToString();
+        List<String> studentIdList = new List<String>();
+        List<String> studentNameList = new List<String>();
+        foreach(GridViewRow row in gv.Rows)
+        {
+            if (((CheckBox)row.FindControl("hasGuardian")).Checked)
+            {
+
+                studentIdList.Add(row.Cells[0].Text);
+                studentNameList.Add(row.Cells[1].Text);
+
+                
+            }
+
+        }
+
+    }
 }

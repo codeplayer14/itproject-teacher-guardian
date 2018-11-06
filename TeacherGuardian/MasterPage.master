@@ -12,9 +12,9 @@
     <form id="form1" runat="server">
     <div>
         <div class="top-navbar">
-            <asp:Label runat="server" Text="Admin" CssClass="navbar-title"></asp:Label>
+            <asp:HyperLink runat="server" Text="Admin" CssClass="navbar-title" NavigateUrl="Admin.aspx" Target="_self"></asp:HyperLink>
             
-            <asp:Label runat="server" Text="Faculty" cssclass="navbar-title"></asp:Label>
+            <asp:Hyperlink runat="server" Text="Faculty" cssclass="navbar-title" NavigateUrl="Faculty.aspx" Target="_self"></asp:Hyperlink>
         </div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
