@@ -16,29 +16,19 @@ public partial class ViewAdd : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            HttpCookie cookie = Request.Cookies["user"];
-            if (cookie == null)
-            {
-                Response.Redirect("Faculty.aspx");
-                //Redirect
-            }
 
-            if (Convert.ToBoolean(cookie["authenticated"].ToString()))
-            {
+            UserAuth.AuthenticateUser("Faculty.aspx",false);
 
-                facultyId = Session["userId"].ToString();
-                facultyName = Session["userName"].ToString();
-            }
-            else
-            {
-                Response.Redirect("Faculty.aspx");
-            }
         }
 
     }
 
     protected void submitRequest_Click(object sender, EventArgs e)
     {
+
+        facultyId = Session["userId"].ToString();
+        facultyName = Session["userName"].ToString();
+
         List<String> studentIdList = new List<String>();
         List<String> studentNameList = new List<String>();
         foreach(GridViewRow row in gv.Rows)

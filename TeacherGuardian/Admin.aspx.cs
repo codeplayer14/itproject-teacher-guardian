@@ -41,7 +41,10 @@ public partial class Admin : System.Web.UI.Page
 
                 if (currentEmail.Equals(email) && currentPass.Equals(password))
                 {
-              
+                    HttpCookie cookie = new HttpCookie("user");
+                    cookie["admin"] = true.ToString();
+                    cookie["authenticated"] = true.ToString();
+                    Response.Cookies.Add(cookie);
                     Response.Redirect("AcceptRequests.aspx");
                 }
             }

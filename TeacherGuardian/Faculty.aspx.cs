@@ -10,6 +10,7 @@ public partial class Faculty : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
 
     }
 
@@ -46,7 +47,7 @@ public partial class Faculty : System.Web.UI.Page
                     Response.Cookies.Add(cookie);
                     Session["userid"] = facultyid;
                     Session["username"] = facultyName;
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("ViewAdd.aspx");
                 }
             }
 
