@@ -16,7 +16,7 @@ public partial class _Default : System.Web.UI.Page
 
         facultyId = Session["userId"].ToString();
          facultyName = Session["userName"].ToString();
-
+        
     }
 
     protected void submitRequest_Click(object sender, EventArgs e)
@@ -28,6 +28,7 @@ public partial class _Default : System.Web.UI.Page
             if (((CheckBox)row.FindControl("hasGuardian")).Checked)
             {
 
+              
                 studentIdList.Add(row.Cells[0].Text);
                 studentNameList.Add(row.Cells[1].Text);
                 
@@ -36,7 +37,7 @@ public partial class _Default : System.Web.UI.Page
         }
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"data source=(localdb)\MSSQLLocalDB;initial catalog=TeacherGuardian";
-        
+        string names = "";
         try
         {
             con.Open();
@@ -50,9 +51,18 @@ public partial class _Default : System.Web.UI.Page
                 com.Parameters.AddWithValue("@FacultyName", facultyName);
                 com.Parameters.AddWithValue("@StudentId", studentIdList.ElementAt(i));
                 com.Parameters.AddWithValue("@StudentName", studentNameList.ElementAt(i));
+                names += " | " + studentNameList.ElementAt(i)+" | ";
+                com.ExecuteNonQuery();
 
+                com = new SqlCommand();
+                com.Connection = con;
+                com.CommandText = "Update student set hasGuardian=2 where id=@id";
+                com.Parameters.AddWithValue("@id", studentIdList.ElementAt(i));
                 com.ExecuteNonQuery();
             }
+
+            
+            
         }catch(Exception ex)
         {
             System.Diagnostics.Debug.Write(ex);
@@ -61,7 +71,8 @@ public partial class _Default : System.Web.UI.Page
         {
             con.Close();
         }
-       
+        status.Text = "Request sent for: " + names;
+        gv.DataBind();
 
     }
 }

@@ -20,7 +20,7 @@
             <asp:BoundField DataField="branch"  HeaderText="Branch"/>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:CheckBox runat="server" ID="hasGuardian" Checked="<%#Convert.ToBoolean(Eval("hasGuardian"))  %>"/>
+                    <asp:CheckBox runat="server" Enabled='<%# !Convert.ToBoolean(Eval("hasGuardian"))   %>' ID="hasGuardian" Checked='<%# Convert.ToBoolean(Eval("hasGuardian"))   %>'/>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -32,5 +32,6 @@
     </asp:DropDownList>
 
     <asp:Button runat="server" Text="Submit" id="submitRequest" OnClick="submitRequest_Click"/>
+    <asp:Label runat="server" ID="status"> </asp:Label>
  </asp:Content>
 

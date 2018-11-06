@@ -11,5 +11,7 @@
     <asp:TextBox runat="server" ID="passwordBox"></asp:TextBox>
 
     <asp:Button  runat="server" ID="submit" OnClick="submit_Click" Text="Submit"/>
+
+    <asp:Label ID="status" Visible="false" runat="server"></asp:Label>
 </asp:Content>
 
