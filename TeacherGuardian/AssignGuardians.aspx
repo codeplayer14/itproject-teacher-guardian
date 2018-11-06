@@ -14,5 +14,5 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=TeacherGuardian;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Id,Name from STUDENT Where HasGuardian=0"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=TeacherGuardian;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT FacultyId, FacultyName from Faculty "></asp:SqlDataSource>
     <asp:Button ID="Button1" runat="server" Text="Assign" OnClick="AssignGuardian" />
-</asp:Content>
+    </asp:Content>
 
