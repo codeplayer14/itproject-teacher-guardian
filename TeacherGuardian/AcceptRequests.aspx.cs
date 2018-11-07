@@ -15,6 +15,17 @@ public partial class AcceptRequests : System.Web.UI.Page
             UserAuth.AuthenticateUser("Admin.aspx",true);
 
         }
+        Application.Lock();
+        if (Application["RequestCount"] == null)
+        {
+            Application["RequestCount"] = "0";
+        }
+        String value = Application["RequestCount"].ToString();
+        string response = "You have " + value + " new requests. ";
+        Response.Write("<script> javascript:alert('"+response+"');</script>");
+        Application["RequestCount"] = "0";
+        Application.UnLock();
+
 
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

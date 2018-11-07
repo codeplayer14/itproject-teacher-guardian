@@ -89,6 +89,13 @@ public partial class ViewAdd : System.Web.UI.Page
         }
         status.Text = "Request sent for: " + names;
         gv.DataBind();
+        Application.Lock();
+        if (Application["PageRequestCount"] == null)
+        {
+            Application["PageRequestCount"] = "0";
+        }
+        Application["RequestCount"] =  Int32.Parse(Application["RequestCount"].ToString()) + 1;
+        Application.UnLock();
 
     }
 }
